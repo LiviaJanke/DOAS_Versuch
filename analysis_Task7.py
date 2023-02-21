@@ -14,13 +14,11 @@ import matplotlib.pyplot as plt
 #%%
 
 exposure_times = (60,50,40,30,20,10)
-dark_currents = (6.2977, 6.7263, 7.3768, 8.3922, 10.476, 16.69)
-dark_currents_errs = (6.4387, 6.4851, 6.8274, 6.7501, 6.7851, 6.9507)
+dark_currents = np.array((255.27, 213.12, 170.44, 125.73, 82.267, 65.313))
+dark_currents_errs = np.array((394.05, 337.13, 278.4, 205.26, 134.44, 65.313))
+dark_current_time_averaged = dark_currents / exposure_times
+dc_error_time_avg = dark_currents_errs / exposure_times
 
-#%%
-
-
-plt.plot(exposure_times, dark_currents)
 
 
 #%%
@@ -32,6 +30,17 @@ plt.grid()
 plt.title('Dark Current vs Exposure Time')
 plt.savefig('Dark Current vs Exposure Time')
 plt.show()
+
+#%%
+
+plt.errorbar(exposure_times, dark_current_time_averaged, dc_error_time_avg, elinewidth = 0.5, capsize = 5, marker = 'X', linewidth = 0)
+plt.xlabel('Exposure Time (s)')
+plt.ylabel('Time Averaged Intensity (a.u.)')
+plt.grid()
+plt.title('Time Averaged Dark Current vs Exposure Time')
+plt.savefig('Time Averaged Dark Current vs Exposure Time')
+plt.show()
+
 
 #%%
 
@@ -53,25 +62,34 @@ plt.show()
 
 #%%
 
-stan_devs = (407.1, 393.79, 386.33, 326.82, 307.27)
+stan_devs_photon_noise = (414.87, 386.55, 367.05, 343.41, 323.04, 283.34)
 
-exposures = (10000, 9000, 8000, 7000, 6000)
+exposures = (10000, 9000, 8000, 7000, 6000, 5000)
 
-plt.plot(exposures, stan_devs, marker = 'X', linewidth = 0)
+plt.plot(exposures, stan_devs_photon_noise, marker = 'X', linewidth = 0)
 plt.grid()
 plt.xlabel('Exposures')
 plt.ylabel('Standard Deviation')
 plt.title('Photon Noise')
 plt.savefig('Photon Noise')
+plt.show()
 
 
 
 #%%
 
+relative_optical_density_noise = (1.2173, 1.4068, 1.3672, 1.3029, 1.4198, 1.0534)
 
 
+plt.plot(exposures, relative_optical_density_noise, marker = 'X', linewidth = 0)
+plt.grid()
+plt.xlabel('Exposures')
+plt.ylabel('Optical Density')
+plt.title('Relative Total Noise')
+plt.savefig('Relative Total Noise')
+plt.show()
 
-
+#%%
 
 
 
