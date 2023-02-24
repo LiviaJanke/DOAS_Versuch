@@ -78,10 +78,12 @@ plt.show()
 
 #%%
 
-relative_optical_density_noise = (1.2173, 1.4068, 1.3672, 1.3029, 1.4198, 1.0534)
+relative_optical_density_noise = ( -0.00699,  -0.015046 , -0.0085272 , -0.011589549 , -0.01568564,  -0.01547557)
+rel_op_dens_noise_delta = (0.021182, 0.027817, 0.024901871, 0.029738359, 0.034668914, 0.04885212)
+rel_op_dens_noise_err = (0.0037046, 0.005306, 0.00467379, 0.00537876, 0.006716826, 0.00871387)
 
 
-plt.plot(exposures, relative_optical_density_noise, marker = 'X', linewidth = 0)
+plt.errorbar(exposures, rel_op_dens_noise_delta, yerr = rel_op_dens_noise_err, marker = 'X', linewidth = 0, capsize = 1, elinewidth = 0.5)
 plt.grid()
 plt.xlabel('Exposures')
 plt.ylabel('Optical Density')
